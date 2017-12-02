@@ -14,7 +14,7 @@ var documentDbOptions = {
 var docDbClient = new azure.DocumentDbClient(documentDbOptions);
 var cosmosStorage = new azure.AzureBotStorage({ gzipData: false }, docDbClient);
 
-var LUIS_MODEL_URL = "https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/f5cc72ec-b8f6-486f-8f5c-88c56bf8d113?subscription-key=fe1edaedf937418d891e2482759bad8e&verbose=true&timezoneOffset=-300";
+var LUIS_MODEL_URL = "https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/6da5d499-5a63-4100-a229-d1d31cc46648?subscription-key=fe1edaedf937418d891e2482759bad8e&verbose=true&timezoneOffset=0";
 
 // Setup Restify Server
 var server = restify.createServer();
@@ -42,16 +42,16 @@ server.post('/api/messages', connector.listen());
 var recognizer = new builder.LuisRecognizer(LUIS_MODEL_URL);
 bot.recognizer(recognizer);
 
-bot.dialog('getPrice', function(session){ //Get Price of certain stock
-  
+bot.dialog('getPrice', function(session){ //Get Price of certain crypto
+
 }).triggerAction({ matches: 'getPrice'});
 
 
-bot.dialog('buyCrypto', function(session){//Get User dividends
+bot.dialog('buyCrypto', function(session){//Buy crypto
 
 }).triggerAction({ matches: 'buyCrypto'});
 
 
-bot.dialog('sellCrypto', function(session){//Place an order to buy stock
+bot.dialog('sellCrypto', function(session){//Sell crypto
 
 }).triggerAction({ matches: 'sellCrypto'});
