@@ -52,11 +52,6 @@ var id = "";
 var recognizer = new builder.LuisRecognizer(LUIS_MODEL_URL);
 bot.recognizer(recognizer);
 
-<<<<<<< HEAD
-bot.dialog('getPrice', function(session){ //Get Price of certain crypto
-
-}).triggerAction({ matches: 'getPrice'});
-=======
 bot.dialog('getPrice', function(session, args){ //Get Price of certain stock
 	var intent = args.intent;
 	console.log(args);
@@ -69,16 +64,11 @@ bot.dialog('getPrice', function(session, args){ //Get Price of certain stock
 	}
 
 	else if(currency == "ethereum"){
->>>>>>> dbd67b442b8f997d45276b5079748cedc942ac60
 
 		currencySymbol = "ETH";
 	}
 
-<<<<<<< HEAD
-bot.dialog('buyCrypto', function(session){//Buy crypto
-=======
 	else if(currency == "litecoin"){
->>>>>>> dbd67b442b8f997d45276b5079748cedc942ac60
 
 		currencySymbol = "LTC";
 	}
