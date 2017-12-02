@@ -2,7 +2,15 @@
 var restify = require('restify');
 var builder = require('botbuilder');
 var azure = require('botbuilder-azure');
+var Client = require('coinbase').Client; //Coinbase dependency
 
+var client = new Client({
+  'apiKey': 'HoOPwjQ5gPxmmrCV',
+  'apiSecret': 'krqOA9EaKWsk9FErOPVBx6YavAlnpGby',
+  'version':'2017-12-02'
+}); //coinbase client creation
+
+currencyCode = 'USD'; //currencyCode for client
 var documentDbOptions = {
     host: 'https://trader-db.documents.azure.com:443/',
     masterKey: 'hwRHpNoNREov4xYITQnuyH1T9sMqIcKIIV9uiuIR94YZb25StqTIZkSltHLIMBJNo9yyFgu3ausa51lNmuAWRA==',
@@ -38,17 +46,53 @@ var bot = new builder.UniversalBot(connector, function (session) {
 server.post('/api/messages', connector.listen());
 
 //Recognizer
-
+var currency = "";
+var currencySymbol = "";
+var id = "";
 var recognizer = new builder.LuisRecognizer(LUIS_MODEL_URL);
 bot.recognizer(recognizer);
 
+<<<<<<< HEAD
 bot.dialog('getPrice', function(session){ //Get Price of certain crypto
 
+}).triggerAction({ matches: 'getPrice'});
+=======
+bot.dialog('getPrice', function(session, args){ //Get Price of certain stock
+	var intent = args.intent;
+	console.log(args);
+	//console.log("\n" + intent.entities);
+	currency = ((builder.EntityRecognizer.findEntity(intent.entities, 'Cryptocurrency')).entity).toLowerCase();
+	console.log(currency);
+	if(currency == "bitcoin"){
+
+		currencySymbol = "BTC";
+	}
+
+	else if(currency == "ethereum"){
+>>>>>>> dbd67b442b8f997d45276b5079748cedc942ac60
+
+		currencySymbol = "ETH";
+	}
+
+<<<<<<< HEAD
+bot.dialog('buyCrypto', function(session){//Buy crypto
+=======
+	else if(currency == "litecoin"){
+>>>>>>> dbd67b442b8f997d45276b5079748cedc942ac60
+
+		currencySymbol = "LTC";
+	}
+	  client.getBuyPrice({'currencyPair': (currencySymbol + '-' + currencyCode)}, function(err, price) {
+	  session.send( "The price of " + currency + " is " +  JSON.stringify(price.data.amount) + " dollars.");
+	});
 }).triggerAction({ matches: 'getPrice'});
 
 
 bot.dialog('buyCrypto', function(session){//Buy crypto
-
+	client.getPaymentMethods(function(err, paymentMethods) {
+  		console.log(paymentMethods);
+});
+	session.send("We aer here");
 }).triggerAction({ matches: 'buyCrypto'});
 
 
