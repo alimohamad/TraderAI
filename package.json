@@ -8,7 +8,8 @@
     "botbuilder-azure": "^3.0.4",
     "coinbase": "^2.0.6",
     "node-cmd": "^3.0.0",
-    "restify": "^6.3.4"
+    "restify": "^6.3.4",
+    "smidgen": "^1.1.1"
   },
   "devDependencies": {},
   "scripts": {
